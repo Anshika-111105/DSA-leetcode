@@ -19,7 +19,6 @@ The repository is structured based on different topics of **DSA**, including but
  ┣ 📁 Queues
  ┣ 📁 Trees
  ┣ 📁 Graphs
- ┣ 📁 Sorting Algorithms
  ┣ 📁 Searching Algorithms
  ┣ 📁 Dynamic Programming
  ┗ 📁 Miscellaneous
