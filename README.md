@@ -8,23 +8,6 @@ Welcome to the **DSA Repository**! This project is designed to provide efficient
 - Collaborate with a community of like-minded programmers.
 - Build your open-source contribution portfolio.
 
-## 🏗️ Repository Structure
-The repository is structured based on different topics of **DSA**, including but not limited to:
-
-```
-📂 DSA Repository
- ┣ 📁 Arrays
- ┣ 📁 Linked List
- ┣ 📁 Stacks
- ┣ 📁 Queues
- ┣ 📁 Trees
- ┣ 📁 Graphs
- ┣ 📁 Searching Algorithms
- ┣ 📁 Dynamic Programming
- ┗ 📁 Miscellaneous
-```
-
-Each folder contains well-documented implementations and explanations for various problems related to that topic.
 
 ## 💡 How to Contribute?
 I welcome contributions from everyone! Follow these steps to get started:
