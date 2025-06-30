@@ -18,5 +18,5 @@ public:
             i++;
         }
         return res;
-    }
-};
+    
+}};
