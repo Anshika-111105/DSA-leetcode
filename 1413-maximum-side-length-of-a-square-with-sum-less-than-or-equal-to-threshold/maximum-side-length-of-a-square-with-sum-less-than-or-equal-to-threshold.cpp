@@ -19,12 +19,10 @@ public:
             for (int col = 1; col <= n; col++) {
                 
                 int currentLen = maxLen + 1;
-                
                 if (row >= currentLen && col >= currentLen) {
-                    
                     int r1 = row - currentLen + 1;
                     int c1 = col - currentLen + 1;
-                    
+
                     int squareSum = pref[row][col] - pref[r1-1][col] - pref[row][c1-1] + pref[r1-1][c1-1];
                     
                     if (squareSum <= threshold) {
