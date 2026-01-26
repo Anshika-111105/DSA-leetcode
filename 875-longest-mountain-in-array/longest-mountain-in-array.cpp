@@ -1,7 +1,7 @@
 class Solution {
 public:
     int longestMountain(vector<int>& arr) {
-        int n=arr.size();
+        int n=arr.size();  //apmortised complexity question
         vector<int>high(n,1),low(n,1);
         for(int i=1;i<n;i++){
             if(arr[i]>arr[i-1])high[i]=high[i-1]+1;
@@ -20,10 +20,6 @@ public:
         return ans;
     }
 };
-
-
-
-
 
 /*class Solution {
 public:
