@@ -1,24 +1,28 @@
 class Solution {
 public:
-    static bool check(pair<int,int>a, pair<int,int>b){
-        return a.second>b.second;
-    }
     vector<int> topKFrequent(vector<int>& nums, int k) {
         int n=nums.size();
         unordered_map<int,int> freq; //put all in map with freq
         for(auto& n:nums){
             freq[n]++;
         }
-        vector<pair<int,int>> answer;
-        for(auto& x:freq){
-            answer.push_back({x.first,x.second}); //add pair wise num,count
+        priority_queue<
+            pair<int,int>,
+            vector<pair<int,int>>,
+            greater<pair<int,int>>
+        > min_heap;
+        for(auto& i:freq){
+            min_heap.push({i.second,i.first});
+            if(min_heap.size()>k){
+                min_heap.pop();
+            }
         }
-        sort(answer.begin(),answer.end(),check); //sort according to count
-        vector<int>real;
-        for(int i=0;i<k;i++){ //i to k-1 are answers return
-            real.push_back(answer[i].first);
+        vector<int> result;
+        while(k--){
+            result.push_back(min_heap.top().second);
+            min_heap.pop();
         }
-        return real;
+        return result;
         
     }
 };
