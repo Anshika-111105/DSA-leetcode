@@ -1,19 +1,21 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        sort(intervals.begin(), intervals.end()); // Sort intervals by start time
-        int k = 0; // Index for merged intervals
-        
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> merged;
+        vector<int> prev = intervals[0];
+
         for (int i = 1; i < intervals.size(); i++) {
-            if (intervals[k][1] >= intervals[i][0]) { // Overlap detected
-                intervals[k][1] = max(intervals[k][1], intervals[i][1]); // Merge
+            if (intervals[i][0] <= prev[1]) {
+                // Merge overlapping intervals
+                prev[1] = max(prev[1], intervals[i][1]);
             } else {
-                k++; // Move to the next position
-                intervals[k] = intervals[i]; // Replace in-place
+                merged.push_back(prev);
+                prev = intervals[i];
             }
         }
-        
-        intervals.resize(k + 1); // Resize to include only merged intervals
-        return intervals;
+
+        merged.push_back(prev);
+        return merged;
     }
 };
