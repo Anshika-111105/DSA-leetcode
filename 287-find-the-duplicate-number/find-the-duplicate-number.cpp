@@ -3,7 +3,7 @@ public:
     int findDuplicate(vector<int>& nums) {
        int slow = 0, fast = 0;
        
-       // Phase 1: Detect cycle (meeting point)
+       // Detect cycle 
        while(true){
            slow = nums[slow];
            fast = nums[nums[fast]];
@@ -12,7 +12,7 @@ public:
            }
        }
        
-       // Phase 2: Find cycle entrance (duplicate number)
+       // Find cycle entrance->duplicate
        slow = 0;
        while(slow != fast){
            slow = nums[slow];
