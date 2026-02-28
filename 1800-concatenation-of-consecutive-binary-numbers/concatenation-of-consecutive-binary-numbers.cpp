@@ -1,17 +1,15 @@
-#define mod 1000000007
 class Solution {
 public:
     int concatenatedBinary(int n) {
+        long long mod = 1000000007;
         long long ans = 0;
-        for(int i=1;i<=n;++i) {
-            int shift = 0;
-            int num = i;
-            while(num){
-                num>>=1;
-                ++shift;
+        int bits = 0;
+        for (int i = 1; i <= n; i++) {
+            if ((i & (i - 1)) == 0) {
+                bits++;
             }
-            ans=((ans<<shift)%mod+i)%mod;
+            ans = ((ans << bits) % mod + i) % mod;
         }
-        return (int)ans;
+        return ans;
     }
 };
