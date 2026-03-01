@@ -10,16 +10,16 @@ public:
             greater<>
         > pq;
 
-        for(int i=0; i<nums1.size() && i<k; i++){
+        for(int i=0; i<nums1.size() && i<k; i++){ //push the first element of each row
             pq.push({nums1[i]+nums2[0], i, 0});
         }
 
-        while(!pq.empty() && ans.size()<k){
-            auto [sum, i, j] = pq.top();
+        while(!pq.empty() && ans.size()<k){ 
+            auto [sum, i, j] = pq.top(); // Pop the smallest sum from heap
             pq.pop();
-            ans.push_back({nums1[i], nums2[j]});
+            ans.push_back({nums1[i], nums2[j]}); //Add the pair to result.
             if(j+1 < nums2.size()){
-                pq.push({nums1[i]+nums2[j+1], i, j+1});
+                pq.push({nums1[i]+nums2[j+1], i, j+1}); //Push the next element in the same row (i, j+1) if valid
             }
         }
         return ans;
