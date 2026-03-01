@@ -5,7 +5,7 @@ public:
         if(nums1.empty() || nums2.empty() || k==0) return ans;
 
         priority_queue<
-            tuple<int,int,int>,
+            tuple<int,int,int>,  // array of integer [sum,i,j]
             vector<tuple<int,int,int>>,
             greater<>
         > pq;
