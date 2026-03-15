@@ -1,33 +1,30 @@
 class Solution {
 public:
-    int countLessEqual(vector<vector<int>>&matrix, int mid, int n){
-        int count=0, row=n-1, col=0;
-        while(row>=0 && col<n){
-            if(matrix[row][col]<=mid){
-                count+=row+1;
-                col++;
+    int countLessOrEqual(vector<vector<int>>& matrix, int median){
+        int m=matrix.size(),n=matrix[0].size();
+        int count=0, c=n-1;
+        for(auto r=0;r<m;r++){
+            while(c>=0 && matrix[r][c]>median){
+                --c;
             }
-            else{
-                row--;
-            }
+            count+=(c+1);
         }
         return count;
     }
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        int n=matrix.size();
-        int low=matrix[0][0], high=matrix[n-1][n-1];
-        int ans=matrix[0][0];
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            int count=countLessEqual(matrix, mid, n);
-            if(count>=k){
-                high=mid-1;
+        int m=matrix.size(),n=matrix[0].size();
+        int left=matrix[0][0], right=matrix[m-1][n-1];
+        int ans=-1;
+        while(left<=right){
+            int mid=(left+right)>>1;
+            if(countLessOrEqual(matrix,mid)>=k){
                 ans=mid;
-            }
-            else{
-                low=mid+1;
+                right=mid-1;
+            }else{
+                left=mid+1;
             }
         }
-        return ans; 
+        return ans;
+
     }
 };
