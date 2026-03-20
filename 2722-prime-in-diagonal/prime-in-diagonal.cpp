@@ -1,6 +1,5 @@
 class Solution {
 private:
-    // Trial division — O(√n)
     bool isPrime(int n) {
         if (n < 2) return false;
         for (int i = 2; (long long)i * i <= n; i++)
