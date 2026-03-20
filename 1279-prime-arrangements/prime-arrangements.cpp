@@ -9,8 +9,7 @@ private:
     }
 public:
     int numPrimeArrangements(int n) {
-        int MOD= 1e9 + 7;
-        int count=0;
+        int MOD= 1e9 + 7,count=0;
         for(int i=2;i<=n;i++){
             bool isPrime=true;
             for(int j=2;j<=sqrt(i);j++){
