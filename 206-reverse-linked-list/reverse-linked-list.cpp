@@ -11,18 +11,13 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* prev = NULL;
-        ListNode* current = head;
-        ListNode* next = NULL;
-        while(current != NULL){
-            next = current->next;
-            current->next = prev; //reverse pointer
-            
-            prev=current;
-            current=next;
-            
-        }
-        return prev;
+        if(!head || !head->next)return head;
+        ListNode* prev=nullptr;
+        ListNode* h2=reverseList(head->next);
+        head->next->next=head;
+        head->next=prev;
+        return h2;
+
         
     }
 };
