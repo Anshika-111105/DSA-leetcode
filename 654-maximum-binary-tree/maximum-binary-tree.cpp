@@ -22,8 +22,8 @@ public:
 
     }
     TreeNode* helper(vector<int>& nums,int left,int right){
-        if (left > right) return nullptr;
-        int maxvalue_index = Maxsearch(nums, left, right);
+        if (left > right) return nullptr; //base case
+        int maxvalue_index = Maxsearch(nums, left, right); //search for current subarray range
         TreeNode* root=new TreeNode(nums[maxvalue_index]);
         root->left = helper(nums, left, maxvalue_index - 1);
         root->right = helper(nums, maxvalue_index + 1, right);
