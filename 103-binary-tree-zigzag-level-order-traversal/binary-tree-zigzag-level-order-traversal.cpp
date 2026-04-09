@@ -1,30 +1,28 @@
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>> res;
-        if (!root) return res;
-        deque<TreeNode*> dq;
-        dq.push_back(root);
-        bool reverse = false;
-        while (!dq.empty()) {
-            int size = dq.size();
-            vector<int> level;
-            for (int i = 0; i < size; i++) {
-                if (!reverse) {
-                    TreeNode* node = dq.front(); dq.pop_front();
-                    level.push_back(node->val);
-                    if (node->left) dq.push_back(node->left);
-                    if (node->right) dq.push_back(node->right);
-                } else {
-                    TreeNode* node = dq.back(); dq.pop_back();
-                    level.push_back(node->val);
-                    if (node->right) dq.push_front(node->right);
-                    if (node->left) dq.push_front(node->left);
-                }
+        vector<vector<int>> ans;
+        if (!root) return ans;
+        bool flag=0; //track the direction at current level
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int size=q.size();
+            vector<int> level(size);
+            for(int i=0;i<size;i++){
+                TreeNode* node=q.front();
+                q.pop();
+                int idx = flag ? (size - i - 1) : i;
+                level[idx]=node->val;
+                if(node->left)q.push(node->left);
+                if(node->right)q.push(node->right);
+
             }
-            res.push_back(level);
-            reverse = !reverse;
+            flag=!flag;
+            ans.push_back(level);
         }
-        return res;
+        return ans;
+
+        
     }
 };
