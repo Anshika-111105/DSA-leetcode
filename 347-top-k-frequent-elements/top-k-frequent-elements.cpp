@@ -6,7 +6,7 @@ public:
         for(auto& n:nums){
             freq[n]++;
         }
-        priority_queue<
+        priority_queue <
             pair<int,int>,
             vector<pair<int,int>>,
             greater<pair<int,int>>
