@@ -2,36 +2,36 @@ class Solution {
 public:
     int minOperations(vector<int>& nums, int x) {
 
-        int total = 0;
+        int totalSum = 0;
 
         for(int num : nums) {
-            total += num;
+            totalSum += num;
         }
 
-        int target = total - x;
+        int target = totalSum - x;
 
         // Impossible case
         if(target < 0) return -1;
 
-        // Need to remove everything
+        // Remove all elements
         if(target == 0) return nums.size();
 
         int left = 0;
-        int sum = 0;
+        int currentSum = 0;
         int maxLen = -1;
 
         for(int right = 0; right < nums.size(); right++) {
 
-            sum += nums[right];
+            currentSum += nums[right];
 
-            // Shrink window
-            while(sum > target) {
-                sum -= nums[left];
+            // Shrink window if sum exceeds target
+            while(currentSum > target) {
+                currentSum -= nums[left];
                 left++;
             }
 
-            // Found target
-            if(sum == target) {
+            // Valid subarray found
+            if(currentSum == target) {
                 maxLen = max(maxLen, right - left + 1);
             }
         }
