@@ -1,44 +1,28 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums, int x) {
-
-        int totalSum = 0;
-
-        for(int num : nums) {
-            totalSum += num;
+        int totalSum=0;
+        for(auto& n:nums){
+            totalSum+=n;
         }
-
-        int target = totalSum - x;
-
-        // Impossible case
-        if(target < 0) return -1;
-
-        // Remove all elements
-        if(target == 0) return nums.size();
-
-        int left = 0;
-        int currentSum = 0;
-        int maxLen = -1;
-
-        for(int right = 0; right < nums.size(); right++) {
-
-            currentSum += nums[right];
-
-            // Shrink window if sum exceeds target
-            while(currentSum > target) {
-                currentSum -= nums[left];
-                left++;
+        int n = nums.size();
+        int target=totalSum-x;
+        if(target < 0)return -1;
+        if(target == 0)return nums.size();
+        int left = 0 , currSum = 0 , maxlen = -1;
+        for(int right = 0; right < nums.size(); right++){
+            currSum += nums[right];
+            while(currSum > target){
+                currSum-=nums[left++];
             }
-
-            // Valid subarray found
-            if(currentSum == target) {
-                maxLen = max(maxLen, right - left + 1);
+            if(currSum == target) {
+                maxlen = max(maxlen, right - left + 1);
             }
         }
+        if(maxlen == -1) return -1;
 
-        // No valid subarray
-        if(maxLen == -1) return -1;
+        return n - maxlen;
 
-        return nums.size() - maxLen;
     }
+    
 };
