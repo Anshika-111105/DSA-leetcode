@@ -16,8 +16,6 @@ public:
         ListNode* h2=reverseList(head->next);
         head->next->next=head;
         head->next=prev;
-        return h2;
-
-        
+        return h2;     
     }
 };
