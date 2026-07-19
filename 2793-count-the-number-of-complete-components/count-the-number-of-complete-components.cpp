@@ -1,45 +1,39 @@
 class Solution {
 public:
-    void bfs(int node,vector<vector<int>> &adj,vector<int> &comp,vector<bool> &vis){
-        queue<int> q;
-        q.push(node);
-        vis[node]=true;
-
-        while(!q.empty()){
-            int n=q.front();
-            q.pop();
-            comp.push_back(n);
-            for(auto it:adj[n]){
-                if(!vis[it]){
-                    q.push(it);
-                    vis[it]=true;
-                }
-            }
-        }
-    }
     int countCompleteComponents(int n, vector<vector<int>>& edges) {
-        vector<vector<int>> adj(n);
-        for(auto it:edges){
-            adj[it[0]].push_back(it[1]);
-            adj[it[1]].push_back(it[0]);
-        }
-        int ans=0;
-        vector<bool> vis(n,false);
-        for(int i=0;i<n;i++){
+        vector<vector<int>> A(n);
 
-            if(!vis[i]){
-                vector<int> comp;
-                bfs(i,adj,comp,vis);
-                bool iscomp=true;
-                for(auto it: comp){
-                    if(adj[it].size()!=comp.size()-1){
-                        iscomp=false;
-                        break;
-                    }
-                }
-                if(iscomp)ans++;
+        for (auto& e : edges) {
+            int u = e[0], v = e[1];
+            A[u].push_back(v);
+            A[v].push_back(u);
+        }
+
+        bitset<51> vis;
+        int res = 0;
+
+        for (int i = 0; i < n; i++) {
+            bool state = vis.test(i);
+
+            if (!state) {
+                int V = 0, D = 0;
+
+                auto dfs = [&](auto& self, int x) -> void {
+                    V++;
+                    D += A[x].size();
+                    vis.set(x);
+
+                    for (auto& state : A[x])
+                        if (!vis.test(state))
+                            self(self, state);
+                };
+
+                dfs(dfs, i);
+
+                res += D == V * (V - 1);
             }
         }
-        return ans;
+
+        return res;
     }
 };
