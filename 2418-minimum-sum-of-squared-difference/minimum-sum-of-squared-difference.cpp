@@ -1,11 +1,6 @@
 class Solution {
 public:
-    long long minSumSquareDiff(
-        vector<int>& nums1,
-        vector<int>& nums2,
-        int k1,
-        int k2
-    ) {
+    long long minSumSquareDiff(vector<int>& nums1, vector<int>& nums2, int k1, int k2) {
         int n = nums1.size();
         vector<int> diff(n);
         long long k = (long long)k1 + k2;
@@ -26,7 +21,7 @@ public:
             int mid = left + (right - left) / 2;
             long long operations = 0;
 
-            for (int d : diff) {
+            for (auto d : diff) {
                 operations += max(0, d - mid);
             }
 
@@ -40,7 +35,7 @@ public:
         int threshold = left;
         long long remaining = k;
 
-        for (int d : diff) {
+        for (auto d : diff) {
             remaining -= max(0, d - threshold);
         }
 
