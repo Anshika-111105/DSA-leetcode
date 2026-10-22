@@ -1,13 +1,26 @@
 class Solution {
 public:
+    int n;
+    inline int findSteps(vector<int>& nums, bool isInc=1){
+        int s=isInc?1:n-2, e=isInc?n:-1, d=(isInc<<1)-1, i, j;
+        for( i=s; i!=e; i+=d){
+            if (nums[i-d]>nums[i]) break;
+        }
+        if (i==e) return 1-isInc; 
+        if (nums[e-d]>nums[s-d]) return -1;
+
+        for ( j=i+d; j!=e; j+=d){ 
+            if (nums[j-d]>nums[j]) break; 
+        }
+        if (j!=e) return -1;
+        int k=i+1-isInc;
+        return min(k+1-isInc, n-k+1+isInc); 
+    }
     int minOperations(vector<int>& nums) {
-        int n = nums.size(), shift = ranges::find(nums, 0) - nums.begin();
-        auto ring = [&](int k) { return nums[(shift + k) % n]; };  // the circle, read from 0
-        auto all = [&](auto holds) { return ranges::all_of(views::iota(0, n), holds); };
-        if (all([&](int k) { return ring(k) == k; }))  // counts up along the arrow
-            return min(shift, n - shift + 2);  // walk ahead, or turn, walk back, turn back
-        if (all([&](int k) { return ring(k) == (n - k) % n; }))  // counts up against the arrow
-            return min(shift + 2, n - shift);  // walk ahead and turn, or turn and walk back
-        return -1;
+        n=nums.size();
+        if (n==1) return 0;
+        int step=findSteps(nums, 1);
+        if (step!=-1) return step;
+        return findSteps(nums, 0);
     }
 };
