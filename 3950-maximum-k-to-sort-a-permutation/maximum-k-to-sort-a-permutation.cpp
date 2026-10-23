@@ -1,12 +1,13 @@
 class Solution {
 public:
     int sortPermutation(vector<int>& nums) {
-        const unsigned n=nums.size();
-        int k0=bit_ceil(n)-1, k=k0;// all bits are set
-        for(int i=0; i<n; i++){
-            const int x=nums[i];
-            if (x!=i) k&=x;
+        int ans = -1;
+        for (int i = 0; i < (int)nums.size(); i++) {
+            if (nums[i] != i) {
+                if (ans == -1) ans = nums[i];
+                else ans &= nums[i];
+            }
         }
-        return k==k0?0:k;
+        return ans == -1 ? 0 : ans;
     }
 };
