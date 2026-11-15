@@ -1,12 +1,21 @@
 class Solution {
 public:
     int numOfSubarrays(vector<int>& arr) {
-        long long oddCount = 0, prefixSum = 0;
-        for(auto a : arr) {
-            prefixSum+=a;
-            oddCount += prefixSum%2;
+        const int MOD = 1e9 + 7;
+        long long odd = 0, even = 0, ans = 0;
+
+        for (int x : arr) {
+            if (x % 2 == 1) {
+                long long newOdd = even + 1;
+                long long newEven = odd;
+                odd = newOdd;
+                even = newEven;
+            } else {
+                even = even + 1;
+            }
+            ans = (ans + odd) % MOD;
         }
-        oddCount += (arr.size() - oddCount) * oddCount;
-        return oddCount % 1'000'000'007;
+
+        return (int) ans;
     }
 };
